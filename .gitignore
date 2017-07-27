@@ -1,0 +1,40 @@
+# Ignore build files
+/dist
+
+# Ignore public files
+/public
+
+# Ignore components
+/components
+
+# Ignore NPM modules
+/node_modules
+
+# Ignore docs
+/docs
+
+# Ignore reports
+/test/report
+
+# Ignore coverage report
+/test/coverage
+
+# Ignore log files
+/log
+
+# Ignore temporary files
+/tmp
+
+# NPM debug logs
+npm-debug.log
+
+# Any intelliJ editor files
+.idea
+
+# log files
+.log
+
+# Vagrant machines
+.vagrant
+
+.DS_Store
