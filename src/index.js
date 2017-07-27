@@ -16,7 +16,7 @@ function component() {
   var btn = document.createElement('button');
 
   //  Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.innerHTML = _.join(['Hello', 'webpack2'], ' ');
 
 
   btn.innerHTML = 'Click me and check the console!';
