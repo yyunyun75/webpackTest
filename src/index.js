@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import './style.scss';
 import gif from './giphy.gif';
+import Data from './data.xml';
 
 function component() {
   var element = document.createElement('div');
@@ -14,8 +15,9 @@ function component() {
   // myGif.src = gif;
   //
   // element.appendChild(myGif);
-
+  console.log('Data');
   return element;
+
 }
 
 document.body.appendChild(component());
