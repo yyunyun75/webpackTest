@@ -1,60 +1,37 @@
-var path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const extractSass = new ExtractTextPlugin({
-    filename: '[name].css',
-    disable: process.env.NODE_ENV === "development"
-});
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-    entry: ['./src/index.js', './src/style.scss'],
-    output:{
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+    entry: {
+        app: './src/index.js',
+        print: './src/print.js'
+    },
+    devtool: 'inline-source-map',
+    devServer:{
+        contentBase: './dist',
+        hot: true
     },
     module:{
-        rules:[{
-                test: /\.scss$/,
-                use: extractSass.extract({
-                    use:[{
-                            loader: 'css-loader'
-                        },
-                        {
-                            loader: 'sass-loader',
-                            // options:{
-                            //     data: '$env: ' +  process.env.NODE_ENV + ';'
-                            // }
-                        }],
-                        fallback: 'style-loader'
-                })
-            },
+        rules:[
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use:[
-                    'file-loader'
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use:[
-                    'file-loader'
-                ]
-            },
-            {
-                test : /\.(csv|tsv)$/,
-                use:[
-                    'csv-loader'
-                ]
-            },
-            {
-                test: /\.xml$/,
-                use:[
-                    'xml-loader'
-                ]
+                test: /\.css$/,
+                use: ['style-loader','css-loader']
             }
         ]
     },
     plugins:[
-        extractSass
-    ]
+        new CleanWebpackPlugin(['dist']),
+        new ManifestPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Hot module replacement'
+        }),
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    output:{
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
+    }
 };

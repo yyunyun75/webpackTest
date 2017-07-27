@@ -1,21 +1,29 @@
 import _ from 'lodash';
-import './style.scss';
-import gif from './giphy.gif';
-import Data from './data.xml';
+import printMe from './print.js';
+import './style.css';
+
+if(module.hot){
+    module.hot.accept('./print.js', function(){
+        console.log("Accepting the updated printMe Module!");
+        document.body.removeChild(element);
+        element = component();
+        document.body.appendChild(element);
+    })
+}
 
 function component() {
   var element = document.createElement('div');
+  var btn = document.createElement('button');
 
   //  Lodash, now imported by this script
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
 
-  //add image to existing div
-  // var myGif = new Image();
-  // myGif.src = gif;
-  //
-  // element.appendChild(myGif);
-  console.log('Data');
+
+  btn.innerHTML = 'Click me and check the console!';
+  btn.onclick = printMe;
+
+  element.appendChild(btn);
+
   return element;
 
 }
